@@ -178,6 +178,10 @@ foreach(TEST_NAME ${TEST_NAMES})
     endif()
 endforeach(TEST_NAME)
 
+if(MSVC)
+  target_compile_options(test_value PRIVATE "/we4866")
+endif()
+
 # this test is to check it compiles. it will not run
 add_executable(test_multiple_translation_unit
                test_multiple_translation_unit_1.cpp

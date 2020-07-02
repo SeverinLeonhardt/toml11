@@ -1017,3 +1017,27 @@ BOOST_AUTO_TEST_CASE(test_value_vector_methods)
         BOOST_CHECK_THROW(v1.emplace_back(1), toml::type_error);
     }
 }
+
+BOOST_AUTO_TEST_CASE(test_value_stringstream)
+{
+    {
+        const toml::value v{1, 2};
+
+        std::stringstream out;
+
+        out << v;
+
+        BOOST_TEST(out.str() == "[\n1,\n2,\n]\n");
+    }
+}
+
+BOOST_AUTO_TEST_CASE(test_value_format)
+{
+    {
+        const toml::value v{{"a", 42}};
+
+        std::string output = toml::format(v);
+
+        BOOST_TEST(output == "a = 42\n");
+    }
+}
